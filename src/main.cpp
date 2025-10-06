@@ -9,30 +9,30 @@
 
 using namespace std;
 
-// Função robusta para ler entradas numéricas, corrigindo o problema do menu
+
 template <typename T>
-T lerEntradaNumerica(const string& mensagem) {
+T lerEntradaNumerica(const string& mensagem) { // Função template para ler entradas numéricas com validação
     T valor;
     while (true) {
         cout << mensagem;
         cin >> valor;
-        if (cin.good()) {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+        if (cin.good()) { // Verifica se a entrada foi bem-sucedida
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
             return valor;
-        } else {
+        } else { // Entrada inválida
             cout << "Entrada invalida. Por favor, digite um valor valido.\n";
             cin.clear(); // Limpa o estado de erro
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Descarta a entrada ruim
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Descarta a entrada inválida
         }
     }
 }
 
-void exibirMenu() {
+void exibirMenu() { // Função para exibir o menu principal
     cout << "\n===== MENU DO BANCO =====\n";
     cout << "1. Depositar\n2. Sacar\n3. Transferir (por numero da conta)\n4. Transferir (PIX)\n5. Exibir Saldo\n6. Exibir Extrato\n7. Listar Todas as Contas\n8. Criar Nova Conta\n9. Cadastrar Chave PIX\n0. Sair" << endl;
 }
 
-int main() {
+int main() { // Função principal
     Banco banco;
     vector<shared_ptr<ContaBancaria>> todasAsContas;
     todasAsContas.push_back(make_shared<ContaBancaria>(1001, Cliente("Ana", "111.111.111-11"), 1000.0));
